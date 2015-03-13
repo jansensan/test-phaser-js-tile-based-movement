@@ -8,6 +8,9 @@ var TILE_SIZE = 16,
 // vars
 var _game = null,
 
+    // player class
+    _player = null,
+
     // map class
     _map = null,
 
@@ -34,12 +37,18 @@ function init() {
 
   // create map
   _map = new Map(_game);
+
+  // create player
+  _player = new Player(_game);
 }
 
 
 function preload() {
   // preload tilemap and tileset
   _map.preload();
+
+  // preload player
+  _player.preload();
 }
 
 function create() {
@@ -48,14 +57,17 @@ function create() {
 
   // init map
   _map.init();
+
+  // init player
+  _player.init({x: 1, y: 1})
 }
 
 function update() {
-
   // update player sprite
-  // _bub.update(
-  //   _keyboardInput.isDown(Phaser.Keyboard.LEFT),
-  //   _keyboardInput.isDown(Phaser.Keyboard.RIGHT),
-  //   _keyboardInput.isDown(Phaser.Keyboard.X)
-  // );
+  _player.update(
+    _keyboardInput.isDown(Phaser.Keyboard.UP),
+    _keyboardInput.isDown(Phaser.Keyboard.RIGHT),
+    _keyboardInput.isDown(Phaser.Keyboard.DOWN),
+    _keyboardInput.isDown(Phaser.Keyboard.LEFT)
+  );
 }
