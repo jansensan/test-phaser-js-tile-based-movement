@@ -1,12 +1,12 @@
 function Map(game) {
   // constants
-  var MAP_NAME = 'Level 01',
+  var MAP_NAME = 'Map',
       Tilesets = {
         TILES: 'FF4 Basic Tileset',
         COLLISION: 'Collision Tileset'
       },
       AssetsPaths = {
-        TILEMAP: 'assets/tilemaps/level-01.json',
+        TILEMAP: 'assets/tilemaps/map.json',
         TILES: 'assets/images/tilesets/tileset.png',
         COLLISION: 'assets/images/tilesets/collision.png'
       };

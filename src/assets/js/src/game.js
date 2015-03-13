@@ -1,9 +1,9 @@
 // constants
 var TILE_SIZE = 16,
-    NUM_COLUMNS = 40,
-    NUM_ROWS = 23,
-    GAME_WIDTH = NUM_COLUMNS * TILE_SIZE, // 640
-    GAME_HEIGHT = NUM_ROWS * TILE_SIZE; // 368
+    NUM_COLUMNS = 15,
+    NUM_ROWS = 10,
+    GAME_WIDTH = NUM_COLUMNS * TILE_SIZE, // 240
+    GAME_HEIGHT = NUM_ROWS * TILE_SIZE; // 160
 
 // vars
 var _game = null,
