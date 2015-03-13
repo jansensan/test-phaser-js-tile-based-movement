@@ -1,0 +1,14 @@
+{
+  "name": "test-phaser-js-grid-movement",
+  "version": "0.0.1",
+  "description": "test-phaser-js-grid-movement",
+  "dependencies": {
+    "phaser": "2.2.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-webserver": "^0.8.7",
+    "main-bower-files": "^2.4.0",
+    "require-dir": "^0.1.0"
+  }
+}
