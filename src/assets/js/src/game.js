@@ -26,14 +26,14 @@ init();
 function init() {
   // add game
   _game = new Phaser.Game(
-      GAME_WIDTH, GAME_HEIGHT,
-      Phaser.CANVAS, 'phaser-js-test',
-      {
-        preload: preload,
-        create: create,
-        update: update
-      }
-    );
+    GAME_WIDTH, GAME_HEIGHT,
+    Phaser.CANVAS, 'phaser-js-test',
+    {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  );
 
   // create map
   _map = new Map(_game);
