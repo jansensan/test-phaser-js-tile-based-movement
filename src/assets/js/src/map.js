@@ -28,6 +28,7 @@ function Map(game) {
   _class.preload = preload;
   _class.init = init;
   _class.getTilesLayer = getTilesLayer;
+  _class.getCollisionLayer = getCollisionLayer;
 
 
   // private methods
@@ -54,7 +55,7 @@ function Map(game) {
     // create layers, assign them an index
     _tilesLayer = _map.createLayer(0);
     _collisionLayer = _map.createLayer(1);
-    _collisionLayer.alpha = 0;
+    _collisionLayer.alpha = 0.333;
 
     // set basic collision
     _map.setCollisionByExclusion([0]);
@@ -66,6 +67,11 @@ function Map(game) {
 
   function getTilesLayer() {
     return _tilesLayer;
+  }
+
+
+  function getCollisionLayer() {
+    return _collisionLayer;
   }
 
 

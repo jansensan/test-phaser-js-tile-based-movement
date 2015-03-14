@@ -3,7 +3,9 @@ function Player(game) {
   var SPRITE_NAME = 'player',
       SPRITESHEET_PATH = 'assets/images/sprites/ff4-remake-chocobo.png',
       TILE_SIZE = 16,
-      ANIM_FPS = 8;
+      ANIM_FPS = 6,
+      WALKING_SPEED = 1;
+      // WALKING_SPEED = 48;
   var Animation = {
     STILL_UP: 'still-up',
     STILL_DOWN: 'still-down',
@@ -37,6 +39,7 @@ function Player(game) {
   var _class = {};
       _class.preload = preload;
       _class.init = init;
+      _class.setPhysics = setPhysics;
       _class.update = update;
       _class.getSprite = getSprite;
 
@@ -73,6 +76,11 @@ function Player(game) {
     _sprite.anchor.setTo(Anchor.X, Anchor.Y);
   }
 
+  function setPhysics() {
+    _sprite.body.collideWorldBounds = true;
+    _sprite.body.setSize(TILE_SIZE, TILE_SIZE, 0, 0);
+  }
+
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
     if(isUpPressed) {
       _walkingDirection = Direction.UP;
@@ -94,8 +102,8 @@ function Player(game) {
       _isWalking = false;
     }
 
-    //
     setAnim();
+    move();
   }
 
   function setAnim() {
@@ -143,6 +151,28 @@ function Player(game) {
           break;
       }
       _sprite.animations.stop();
+    }
+  }
+
+  function move() {
+    if(_isWalking) {
+      switch(_walkingDirection) {
+        case Direction.UP:
+          _sprite.y -= WALKING_SPEED;
+          break;
+
+        case Direction.RIGHT:
+          _sprite.x += WALKING_SPEED;
+          break;
+
+        case Direction.DOWN:
+          _sprite.y += WALKING_SPEED;
+          break;
+
+        case Direction.LEFT:
+          _sprite.x -= WALKING_SPEED;
+          break;
+      }
     }
   }
 

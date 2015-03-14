@@ -42,7 +42,6 @@ function init() {
   _player = new Player(_game);
 }
 
-
 function preload() {
   // preload tilemap and tileset
   _map.preload();
@@ -60,9 +59,20 @@ function create() {
 
   // init player
   _player.init({x: 1, y: 1})
+
+  // set physics engine
+  _game.physics.startSystem(Phaser.Physics.ARCADE);
+  _game.physics.enable(_player.getSprite(), Phaser.Physics.ARCADE);
+  _player.setPhysics();
 }
 
 function update() {
+  // collision detection
+  _game.physics.arcade.collide(
+    _player.getSprite(),
+    _map.getCollisionLayer()
+  );
+
   // update player sprite
   _player.update(
     _keyboardInput.isDown(Phaser.Keyboard.UP),
