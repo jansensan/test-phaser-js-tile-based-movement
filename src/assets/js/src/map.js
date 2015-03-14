@@ -55,10 +55,10 @@ function Map(game) {
     // create layers, assign them an index
     _tilesLayer = _map.createLayer(0);
     _collisionLayer = _map.createLayer(1);
-    _collisionLayer.alpha = 0.333;
+    _collisionLayer.alpha = 0;
 
     // set basic collision
-    _map.setCollisionByExclusion([0]);
+    _map.setCollisionByExclusion([0, 1]);
 
     _tilesLayer.resizeWorld();
     _collisionLayer.resizeWorld();

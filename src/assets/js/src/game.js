@@ -70,7 +70,7 @@ function update() {
   // collision detection
   _game.physics.arcade.collide(
     _player.getSprite(),
-    _map.getCollisionLayer()
+    _map.getTilesLayer()
   );
 
   // update player sprite

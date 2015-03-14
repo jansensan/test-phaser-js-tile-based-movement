@@ -5,7 +5,6 @@ function Player(game) {
       TILE_SIZE = 16,
       ANIM_FPS = 6,
       WALKING_SPEED = 1;
-      // WALKING_SPEED = 48;
   var Animation = {
     STILL_UP: 'still-up',
     STILL_DOWN: 'still-down',
@@ -77,7 +76,6 @@ function Player(game) {
   }
 
   function setPhysics() {
-    _sprite.body.collideWorldBounds = true;
     _sprite.body.setSize(TILE_SIZE, TILE_SIZE, 0, 0);
   }
 
@@ -158,22 +156,29 @@ function Player(game) {
     if(_isWalking) {
       switch(_walkingDirection) {
         case Direction.UP:
-          _sprite.y -= WALKING_SPEED;
+          _sprite.body.y -= WALKING_SPEED;
           break;
 
         case Direction.RIGHT:
-          _sprite.x += WALKING_SPEED;
+          _sprite.body.x += WALKING_SPEED;
           break;
 
         case Direction.DOWN:
-          _sprite.y += WALKING_SPEED;
+          _sprite.body.y += WALKING_SPEED;
           break;
 
         case Direction.LEFT:
-          _sprite.x -= WALKING_SPEED;
+          _sprite.body.x -= WALKING_SPEED;
           break;
       }
     }
+  }
+
+  function isOnTile() {
+    var spriteX = _sprite.x + (Anchor.X * TILE_SIZE),
+        spriteY = _sprite.y,
+        isOn = (spriteX % TILE_SIZE === 0) && (spriteY % TILE_SIZE === 0);
+    return isOn;
   }
 
   function getTileX(tileXId) {
