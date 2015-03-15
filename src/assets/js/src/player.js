@@ -29,9 +29,11 @@ function Player(game) {
   var _game = game,
       _sprite = null,
       _initialTile = null,
+      _currentTile = null,
       _walkingDirection = null,
       _isIdle = false,
-      _isWalking = false;
+      _isWalking = false
+      _isSpriteMoving = false;
 
 
   // public api
@@ -80,24 +82,33 @@ function Player(game) {
   }
 
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
-    if(isUpPressed) {
-      _walkingDirection = Direction.UP;
-      _isWalking = true;
+    if(isOnTile()) {
+      _currentTile = getTileFromCurrentPosition();
 
-    } else if(isRightPressed) {
-      _walkingDirection = Direction.RIGHT;
-      _isWalking = true;
+      if(isUpPressed) {
+        _walkingDirection = Direction.UP;
+        _isWalking = true;
+        _isSpriteMoving = true;
 
-    } else if(isDownPressed) {
-      _walkingDirection = Direction.DOWN;
-      _isWalking = true;
+      } else if(isRightPressed) {
+        _walkingDirection = Direction.RIGHT;
+        _isWalking = true;
+        _isSpriteMoving = true;
 
-    } else if(isLeftPressed) {
-      _walkingDirection = Direction.LEFT;
-      _isWalking = true;
+      } else if(isDownPressed) {
+        _walkingDirection = Direction.DOWN;
+        _isWalking = true;
+        _isSpriteMoving = true;
 
-    } else {
-      _isWalking = false;
+      } else if(isLeftPressed) {
+        _walkingDirection = Direction.LEFT;
+        _isWalking = true;
+        _isSpriteMoving = true;
+
+      } else {
+        _isWalking = false;
+        _isSpriteMoving = false;
+      }
     }
 
     setAnim();
@@ -153,7 +164,7 @@ function Player(game) {
   }
 
   function move() {
-    if(_isWalking) {
+    if(_isSpriteMoving) {
       switch(_walkingDirection) {
         case Direction.UP:
           _sprite.body.y -= WALKING_SPEED;
@@ -179,6 +190,13 @@ function Player(game) {
         spriteY = _sprite.y,
         isOn = (spriteX % TILE_SIZE === 0) && (spriteY % TILE_SIZE === 0);
     return isOn;
+  }
+
+  function getTileFromCurrentPosition() {
+    var spriteX = _sprite.x - (Anchor.X * TILE_SIZE),
+        spriteY = _sprite.y - TILE_SIZE;
+        tile = {x: spriteX / TILE_SIZE, y: spriteY / TILE_SIZE};
+    return tile;
   }
 
   function getTileX(tileXId) {

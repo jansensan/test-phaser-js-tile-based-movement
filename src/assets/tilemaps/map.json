@@ -1,78 +1,69 @@
-{ "height":10,
- "layers":[
-        {
-         "data":[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-         "height":10,
-         "name":"Map",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":15,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "data":[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 0, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 5, 0, 5, 5, 5, 0, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-         "height":10,
-         "name":"Collision",
-         "opacity":0.330000013113022,
-         "type":"tilelayer",
-         "visible":true,
-         "width":15,
-         "x":0,
-         "y":0
-        }],
- "nextobjectid":1,
- "orientation":"orthogonal",
- "properties":
-    {
+{
+  "height": 10,
+  "layers": [{
+    "data": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    "height": 10,
+    "name": "Map",
+    "opacity": 1,
+    "type": "tilelayer",
+    "visible": true,
+    "width": 15,
+    "x": 0,
+    "y": 0
+  }, {
+    "data": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 0, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 5, 0, 5, 5, 5, 0, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+    "height": 10,
+    "name": "Collision",
+    "opacity": 0.330000013113022,
+    "type": "tilelayer",
+    "visible": true,
+    "width": 15,
+    "x": 0,
+    "y": 0
+  }],
+  "nextobjectid": 1,
+  "orientation": "orthogonal",
+  "properties": {
+
+  },
+  "renderorder": "right-down",
+  "tileheight": 16,
+  "tilesets": [{
+    "firstgid": 1,
+    "image": "..\/images\/tilesets\/tileset.png",
+    "imageheight": 16,
+    "imagewidth": 48,
+    "margin": 0,
+    "name": "FF4 Basic Tileset",
+    "properties": {
 
     },
- "renderorder":"right-down",
- "tileheight":16,
- "tilesets":[
-        {
-         "firstgid":1,
-         "image":"..\/images\/tilesets\/tileset.png",
-         "imageheight":16,
-         "imagewidth":48,
-         "margin":0,
-         "name":"FF4 Basic Tileset",
-         "properties":
-            {
+    "spacing": 0,
+    "tileheight": 16,
+    "tilewidth": 16
+  }, {
+    "firstgid": 4,
+    "image": "..\/images\/tilesets\/collision.png",
+    "imageheight": 16,
+    "imagewidth": 48,
+    "margin": 0,
+    "name": "Collision Tileset",
+    "properties": {
 
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "firstgid":4,
-         "image":"..\/images\/tilesets\/collision.png",
-         "imageheight":16,
-         "imagewidth":48,
-         "margin":0,
-         "name":"Collision Tileset",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tileproperties":
-            {
-             "1":
-                {
-                 "collisions":"true"
-                },
-             "2":
-                {
-                 "collisions":"true"
-                }
-            },
-         "tilewidth":16
-        }],
- "tilewidth":16,
- "version":1,
- "width":15
+    },
+    "spacing": 0,
+    "tileheight": 16,
+    "tileproperties": {
+      "1": {
+        "collisions": "true"
+      },
+      "2": {
+        "collisions": "true"
+      }
+    },
+    "tilewidth": 16
+  }],
+  "tilewidth": 16,
+  "version": 1,
+  "width": 15
 }
