@@ -8,5 +8,6 @@ For some reason, Phaser's Arcade Physics engine didn't handle collision detectio
 
 ## TODO
 
-- Test NPCs moving independently
+- NPCs and player
+  - See if possible to create a super class that encompasses common behavior. ES6 or LoDash?
 - Test A* algorithm on clicking a valid tile
