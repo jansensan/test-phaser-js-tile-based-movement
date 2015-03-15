@@ -49,6 +49,7 @@ function Map(game) {
       // getters
       _class.getTilesLayer = getTilesLayer;
       _class.getCollisionAt = getCollisionAt;
+      _class.setCollisionAt = setCollisionAt;
       _class.getSurroundingCollisionsAt = getSurroundingCollisionsAt;
       // properties
       _class.collisionTiles = [];
@@ -124,13 +125,24 @@ function Map(game) {
     return hasCollision;
   }
 
+  function setCollisionAt(tile, hasCollision) {
+    var tileData = _tilesLayer.layer.data[tile.y][tile.x];
+    tileData.collideUp = hasCollision;
+    tileData.collideRight = hasCollision;
+    tileData.collideDown = hasCollision;
+    tileData.collideLeft = hasCollision;
+  }
+
   function resetSurroundingsToDraw() {
     _surroundingsToDraw.length = 0;
     _surroundingsToDraw = [];
   }
 
-  function getSurroundingCollisionsAt(tile) {
-    resetSurroundingsToDraw();
+  function getSurroundingCollisionsAt(tile, setsSurroundingsToDraw) {
+    if(setsSurroundingsToDraw) {
+      resetSurroundingsToDraw();
+    }
+
     var surroundings = {
       up: false,
       right: false,
@@ -147,7 +159,9 @@ function Map(game) {
       surroundings.up = true;
     } else {
       surroundings.up = getCollisionAt(tileUp);
-      _surroundingsToDraw.push({tile: tileUp, collision: surroundings.up});
+      if(setsSurroundingsToDraw) {
+        _surroundingsToDraw.push({tile: tileUp, collision: surroundings.up});
+      }
     }
 
     // check tile right
@@ -159,7 +173,9 @@ function Map(game) {
       surroundings.right = true;
     } else {
       surroundings.right = getCollisionAt(tileRight);
-      _surroundingsToDraw.push({tile: tileRight, collision: surroundings.right});
+      if(setsSurroundingsToDraw) {
+        _surroundingsToDraw.push({tile: tileRight, collision: surroundings.right});
+      }
     }
 
     // check tile down
@@ -171,7 +187,9 @@ function Map(game) {
       surroundings.down = true;
     } else {
       surroundings.down = getCollisionAt(tileDown);
-      _surroundingsToDraw.push({tile: tileDown, collision: surroundings.down});
+      if(setsSurroundingsToDraw) {
+        _surroundingsToDraw.push({tile: tileDown, collision: surroundings.down});
+      }
     }
 
     // check tile left
@@ -183,7 +201,9 @@ function Map(game) {
       surroundings.left = true;
     } else {
       surroundings.left = getCollisionAt(tileLeft);
-      _surroundingsToDraw.push({tile: tileLeft, collision: surroundings.left});
+      if(setsSurroundingsToDraw) {
+        _surroundingsToDraw.push({tile: tileLeft, collision: surroundings.left});
+      }
     }
 
     return surroundings;
