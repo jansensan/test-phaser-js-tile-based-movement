@@ -1,10 +1,12 @@
 # PhaserJS Grid Movement
 
+## About
+
 An attempt at implementing [PhaserJS's Coding Tip #5](http://www.photonstorm.com/phaser/phaser-coding-tips-5).
 
+For some reason, Phaser's Arcade Physics engine didn't handle collision detection. In its stead, I implemented my own tile-based collision system and movement.
 
-## Known issues
+## TODO
 
-### Cannot get collision to work currently
-
-There is [an open thread|http://www.html5gamedevs.com/topic/13121-cannot-get-collision-to-work-for-top-down-movement/] about this issue.
+- Test NPCs moving independently
+- Test A* algorithm on clicking a valid tile
