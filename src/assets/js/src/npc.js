@@ -1,10 +1,10 @@
-function Player(game, map) {
+function NPC(game, map) {
   // constants
-  var SPRITE_NAME = 'player',
-      SPRITESHEET_PATH = 'assets/images/sprites/ff4-remake-chocobo.png',
+  var SPRITE_NAME = 'npc',
+      SPRITESHEET_PATH = 'assets/images/sprites/tonberry.png',
       TILE_SIZE = 16,
-      ANIM_FPS = 6,
-      WALKING_SPEED = 1;
+      ANIM_FPS = 2,
+      WALKING_SPEED = 0.25;
   var Animation = {
     STILL_UP: 'still-up',
     STILL_DOWN: 'still-down',
@@ -23,6 +23,12 @@ function Player(game, map) {
     DOWN: 'down',
     LEFT: 'left'
   };
+  var DIRECTIONS = [
+    Direction.UP,
+    Direction.RIGHT,
+    Direction.DOWN,
+    Direction.LEFT
+  ]
 
 
   // vars
@@ -51,8 +57,6 @@ function Player(game, map) {
       _class.preload = preload;
       _class.init = init;
       _class.update = update;
-      // getters
-      _class.getSprite = getSprite;
 
 
   // private methods
@@ -85,66 +89,30 @@ function Player(game, map) {
 
     // set anchor
     _sprite.anchor.setTo(Anchor.X, Anchor.Y);
+
+    // move sprite on init
+    _isSpriteMoving = true;
+    _isWalking = true;
   }
 
-  function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
+  function update() {
     if(isOnTile()) {
       // clear previous position's collision
       if(_currentTile) {
         _map.setCollisionAt(_currentTile, false);
       }
-
+      
       // get current tile
       _currentTile = getTileFromCurrentPosition();
       _map.setCollisionAt(_currentTile, true);
-      
+
       // check surrounding collisions
-      _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile, true);
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile);
 
-      if(isUpPressed) {
-        _walkingDirection = Direction.UP;
-        if(!_surroundingCollisions.up) {
-          _isWalking = true;
-          _isSpriteMoving = true;
-        } else {
-          _isWalking = false;
-          _isSpriteMoving = false;
-        }
-
-      } else if(isRightPressed) {
-        _walkingDirection = Direction.RIGHT;
-        if(!_surroundingCollisions.right) {
-          _isWalking = true;
-          _isSpriteMoving = true;
-        } else {
-          _isWalking = false;
-          _isSpriteMoving = false;
-        }
-
-      } else if(isDownPressed) {
-        _walkingDirection = Direction.DOWN;
-        if(!_surroundingCollisions.down) {
-          _isWalking = true;
-          _isSpriteMoving = true;
-        } else {
-          _isWalking = false;
-          _isSpriteMoving = false;
-        }
-
-      } else if(isLeftPressed) {
-        _walkingDirection = Direction.LEFT;
-        if(!_surroundingCollisions.left) {
-          _isWalking = true;
-          _isSpriteMoving = true;
-        } else {
-          _isWalking = false;
-          _isSpriteMoving = false;
-        }
-
-      } else {
-        _isWalking = false;
-        _isSpriteMoving = false;
-      }
+      // movement behavior
+      // reverseDirectionOnCollision();
+      // randomDirectionOnCollision();
+      randomDirectionOnTile();
 
     // is not on tile (is moving)
     } else {
@@ -152,7 +120,8 @@ function Player(game, map) {
       setNextTileFromCurrentDirection();
       _map.setCollisionAt(_nextTile, true);
 
-      _surroundingCollisions = _map.getSurroundingCollisionsAt(_nextTile, true);
+      // check surrounding collisions
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_nextTile);
     }
 
     setAnim();
@@ -207,6 +176,7 @@ function Player(game, map) {
     }
   }
 
+  // movement
   function move() {
     if(_isSpriteMoving) {
       switch(_walkingDirection) {
@@ -229,6 +199,98 @@ function Player(game, map) {
     }
   }
 
+  // movement behaviors
+  function reverseDirectionOnCollision() {
+    switch(_walkingDirection) {
+      case Direction.UP:
+        if(_surroundingCollisions.up) {
+          _walkingDirection = Direction.DOWN;
+        }
+        break;
+
+      case Direction.RIGHT:
+        if(_surroundingCollisions.right) {
+          _walkingDirection = Direction.LEFT;
+        }
+        break;
+
+      case Direction.DOWN:
+        if(_surroundingCollisions.down) {
+          _walkingDirection = Direction.UP;
+        }
+        break;
+
+      case Direction.LEFT:
+        if(_surroundingCollisions.left) {
+          _walkingDirection = Direction.RIGHT;
+        }
+        break;
+    }
+  }
+
+  function randomDirectionOnCollision() {
+    switch(_walkingDirection) {
+      case Direction.UP:
+        if(_surroundingCollisions.up) {
+          setRandomDirection();
+        }
+        break;
+
+      case Direction.RIGHT:
+        if(_surroundingCollisions.right) {
+          setRandomDirection();
+        }
+        break;
+
+      case Direction.DOWN:
+        if(_surroundingCollisions.down) {
+          setRandomDirection();
+        }
+        break;
+
+      case Direction.LEFT:
+        if(_surroundingCollisions.left) {
+          setRandomDirection();
+        }
+        break;
+    }
+  }
+
+  function randomDirectionOnTile() {
+    setRandomDirection();
+  }
+
+  function getAvailableDirections() {
+    var availableDirections = [];
+    if(!_surroundingCollisions.up) {
+      availableDirections.push(Direction.UP);
+    }
+    if(!_surroundingCollisions.right) {
+      availableDirections.push(Direction.RIGHT);
+    }
+    if(!_surroundingCollisions.down) {
+      availableDirections.push(Direction.DOWN);
+    }
+    if(!_surroundingCollisions.left) {
+      availableDirections.push(Direction.LEFT);
+    }
+    return availableDirections;
+  }
+
+  function getRandomDirection() {
+    // temp direction array
+    var directions = getAvailableDirections();
+
+    // get random direction
+    var random = Math.floor(Math.random() * directions.length);
+    return directions[random];
+  }
+
+  function setRandomDirection() {
+    _walkingDirection = getRandomDirection();
+  }
+
+  // map handlers
   function isOnTile() {
     var spriteX = _sprite.x + (Anchor.X * TILE_SIZE),
         spriteY = _sprite.y,
@@ -269,12 +331,6 @@ function Player(game, map) {
 
   function getTileY(tileYId) {
     return (Anchor.Y * TILE_SIZE) + (tileYId * TILE_SIZE);
-  }
-
-
-  // getters
-  function getSprite() {
-    return _sprite;
   }
 
 
