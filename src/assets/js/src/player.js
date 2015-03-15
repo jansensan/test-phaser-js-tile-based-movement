@@ -89,8 +89,17 @@ function Player(game, map) {
 
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
     if(isOnTile()) {
+      // clear previous position's collision
+      if(_currentTile) {
+        _map.setCollisionAt(_currentTile, false);
+      }
+
+      // get current tile
       _currentTile = getTileFromCurrentPosition();
-      _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile);
+      _map.setCollisionAt(_currentTile, true);
+      
+      // check surrounding collisions
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile, true);
 
       if(isUpPressed) {
         _walkingDirection = Direction.UP;
@@ -136,9 +145,14 @@ function Player(game, map) {
         _isWalking = false;
         _isSpriteMoving = false;
       }
+
+    // is not on tile (is moving)
     } else {
+      // get next tile
       setNextTileFromCurrentDirection();
-      _surroundingCollisions = _map.getSurroundingCollisionsAt(_nextTile);
+      _map.setCollisionAt(_nextTile, true);
+
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_nextTile, true);
     }
 
     setAnim();
