@@ -13,12 +13,9 @@
 
   // vars
   var _game = null,
-
-      // player class
-      _player = null,
-
-      // map class
       _map = null,
+      _player = null,
+      _tonberry = null,
 
       // reference for code reduction
       _keyboardInput = null;
@@ -47,35 +44,33 @@
 
     // create player
     _player = new Player(_game, _map);
+    _tonberry = new NPC(_game, _map);
   }
 
   function preload() {
-    // preload tilemap and tileset
     _map.preload();
-
-    // preload player
     _player.preload();
+    _tonberry.preload();
   }
 
   function create() {
     // set references
     _keyboardInput = _game.input.keyboard;
 
-    // init map
+    // init game objects
     _map.init();
-
-    // init player
     _player.init({x: 1, y: 1})
+    _tonberry.init({x: 7, y: 1});
   }
 
   function update() {
-    // update player sprite
     _player.update(
       _keyboardInput.isDown(Phaser.Keyboard.UP),
       _keyboardInput.isDown(Phaser.Keyboard.RIGHT),
       _keyboardInput.isDown(Phaser.Keyboard.DOWN),
       _keyboardInput.isDown(Phaser.Keyboard.LEFT)
     );
+    _tonberry.update();
   }
 
   function render() {
