@@ -1,4 +1,4 @@
-function Player(game) {
+function Player(game, map) {
   // constants
   var SPRITE_NAME = 'player',
       SPRITESHEET_PATH = 'assets/images/sprites/ff4-remake-chocobo.png',
@@ -27,12 +27,20 @@ function Player(game) {
 
   // vars
   var _game = game,
+      _map = map,
       _sprite = null,
+
+      // positions vars
       _initialTile = null,
       _currentTile = null,
+
+      // animation vars
       _walkingDirection = null,
       _isIdle = false,
-      _isWalking = false
+      _isWalking = false,
+
+      // movement vars
+      _surroundingCollisions = null,
       _isSpriteMoving = false;
 
 
@@ -85,25 +93,36 @@ function Player(game) {
     if(isOnTile()) {
       _currentTile = getTileFromCurrentPosition();
 
+      // FIXME: if sprite moving, check next one
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile);
+
       if(isUpPressed) {
         _walkingDirection = Direction.UP;
-        _isWalking = true;
-        _isSpriteMoving = true;
+        if(!_surroundingCollisions.up) {
+          _isWalking = true;
+          _isSpriteMoving = true;
+        }
 
       } else if(isRightPressed) {
         _walkingDirection = Direction.RIGHT;
-        _isWalking = true;
-        _isSpriteMoving = true;
+        if(!_surroundingCollisions.right) {
+          _isWalking = true;
+          _isSpriteMoving = true;
+        }
 
       } else if(isDownPressed) {
         _walkingDirection = Direction.DOWN;
-        _isWalking = true;
-        _isSpriteMoving = true;
+        if(!_surroundingCollisions.down) {
+          _isWalking = true;
+          _isSpriteMoving = true;
+        }
 
       } else if(isLeftPressed) {
         _walkingDirection = Direction.LEFT;
-        _isWalking = true;
-        _isSpriteMoving = true;
+        if(!_surroundingCollisions.left) {
+          _isWalking = true;
+          _isSpriteMoving = true;
+        }
 
       } else {
         _isWalking = false;

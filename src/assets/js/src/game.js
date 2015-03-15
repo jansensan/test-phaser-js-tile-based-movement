@@ -39,7 +39,7 @@ function init() {
   _map = new Map(_game);
 
   // create player
-  _player = new Player(_game);
+  _player = new Player(_game, _map);
 }
 
 function preload() {
