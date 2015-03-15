@@ -102,6 +102,9 @@ function Player(game, map) {
         if(!_surroundingCollisions.up) {
           _isWalking = true;
           _isSpriteMoving = true;
+        } else {
+          _isWalking = false;
+          _isSpriteMoving = false;
         }
 
       } else if(isRightPressed) {
@@ -109,6 +112,9 @@ function Player(game, map) {
         if(!_surroundingCollisions.right) {
           _isWalking = true;
           _isSpriteMoving = true;
+        } else {
+          _isWalking = false;
+          _isSpriteMoving = false;
         }
 
       } else if(isDownPressed) {
@@ -116,6 +122,9 @@ function Player(game, map) {
         if(!_surroundingCollisions.down) {
           _isWalking = true;
           _isSpriteMoving = true;
+        } else {
+          _isWalking = false;
+          _isSpriteMoving = false;
         }
 
       } else if(isLeftPressed) {
@@ -123,6 +132,9 @@ function Player(game, map) {
         if(!_surroundingCollisions.left) {
           _isWalking = true;
           _isSpriteMoving = true;
+        } else {
+          _isWalking = false;
+          _isSpriteMoving = false;
         }
 
       } else {
