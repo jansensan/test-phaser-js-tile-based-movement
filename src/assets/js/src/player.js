@@ -33,6 +33,7 @@ function Player(game, map) {
       // positions vars
       _initialTile = null,
       _currentTile = null,
+      _nextTile = null,
 
       // animation vars
       _walkingDirection = null,
@@ -94,8 +95,6 @@ function Player(game, map) {
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
     if(isOnTile()) {
       _currentTile = getTileFromCurrentPosition();
-
-      // FIXME: if sprite moving, check next one
       _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile);
 
       if(isUpPressed) {
@@ -130,6 +129,9 @@ function Player(game, map) {
         _isWalking = false;
         _isSpriteMoving = false;
       }
+    } else {
+      setNextTileFromCurrentDirection();
+      _surroundingCollisions = _map.getSurroundingCollisionsAt(_nextTile);
     }
 
     setAnim();
@@ -218,6 +220,26 @@ function Player(game, map) {
         spriteY = _sprite.y - TILE_SIZE;
         tile = {x: spriteX / TILE_SIZE, y: spriteY / TILE_SIZE};
     return tile;
+  }
+
+  function setNextTileFromCurrentDirection() {
+    switch(_walkingDirection) {
+      case Direction.UP:
+        _nextTile = {x: _currentTile.x, y: _currentTile.y - 1};
+        break;
+
+      case Direction.RIGHT:
+        _nextTile = {x: _currentTile.x + 1, y: _currentTile.y};
+        break;
+
+      case Direction.DOWN:
+        _nextTile = {x: _currentTile.x, y: _currentTile.y + 1};
+        break;
+
+      case Direction.LEFT:
+        _nextTile = {x: _currentTile.x - 1, y: _currentTile.y};
+        break;
+    }
   }
 
   function getTileX(tileXId) {
