@@ -84,15 +84,15 @@ function Map(game) {
         collisionTile,
         targetTile,
         hasCollision;
-    for(i = 0; i < NUM_COLUMNS; i++) {
-      for(j = 0; j < NUM_ROWS; j++) {
+    for(i = 0; i < NUM_ROWS; i++) {
+      for(j = 0; j < NUM_COLUMNS; j++) {
         // get collision data from collision layer
-        collisionTile = _collisionLayer.layer.data[j][i];
+        collisionTile = _collisionLayer.layer.data[i][j];
         hasCollision = (collisionTile.index > -1);
 
         // set collision uniformely
         // (no cloud tile for now)
-        targetTile = _tilesLayer.layer.data[j][i];
+        targetTile = _tilesLayer.layer.data[i][j];
         targetTile.collideDown = hasCollision;
         targetTile.collideLeft = hasCollision;
         targetTile.collideRight = hasCollision;
