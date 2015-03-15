@@ -50,7 +50,6 @@ function Player(game, map) {
       // methods
       _class.preload = preload;
       _class.init = init;
-      _class.setPhysics = setPhysics;
       _class.update = update;
       // getters
       _class.getSprite = getSprite;
@@ -86,10 +85,6 @@ function Player(game, map) {
 
     // set anchor
     _sprite.anchor.setTo(Anchor.X, Anchor.Y);
-  }
-
-  function setPhysics() {
-    _sprite.body.setSize(TILE_SIZE, TILE_SIZE, 0, 0);
   }
 
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
@@ -202,19 +197,19 @@ function Player(game, map) {
     if(_isSpriteMoving) {
       switch(_walkingDirection) {
         case Direction.UP:
-          _sprite.body.y -= WALKING_SPEED;
+          _sprite.y -= WALKING_SPEED;
           break;
 
         case Direction.RIGHT:
-          _sprite.body.x += WALKING_SPEED;
+          _sprite.x += WALKING_SPEED;
           break;
 
         case Direction.DOWN:
-          _sprite.body.y += WALKING_SPEED;
+          _sprite.y += WALKING_SPEED;
           break;
 
         case Direction.LEFT:
-          _sprite.body.x -= WALKING_SPEED;
+          _sprite.x -= WALKING_SPEED;
           break;
       }
     }
