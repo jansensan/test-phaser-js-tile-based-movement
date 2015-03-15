@@ -83,12 +83,13 @@ function Map(game) {
     var i = 0, j = 0,
         collisionTile,
         targetTile,
-        hasCollision;
+        hasCollision,
+        collisionLog = '';
     for(i = 0; i < NUM_ROWS; i++) {
       for(j = 0; j < NUM_COLUMNS; j++) {
         // get collision data from collision layer
         collisionTile = _collisionLayer.layer.data[i][j];
-        hasCollision = (collisionTile.index > -1);
+        hasCollision = (collisionTile.index > 4); // TODO: figure how to make dynamic?
 
         // set collision uniformely
         // (no cloud tile for now)
@@ -97,8 +98,12 @@ function Map(game) {
         targetTile.collideLeft = hasCollision;
         targetTile.collideRight = hasCollision;
         targetTile.collideUp = hasCollision;
+
+        collisionLog += hasCollision ? '×' : ' ';
       }
+      collisionLog += '\n';
     }
+    // console.log(collisionLog);
 
     _tilesLayer.resizeWorld();
     _collisionLayer.resizeWorld();
