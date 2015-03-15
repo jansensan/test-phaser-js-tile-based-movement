@@ -46,10 +46,12 @@ function Player(game, map) {
 
   // public api
   var _class = {};
+      // methods
       _class.preload = preload;
       _class.init = init;
       _class.setPhysics = setPhysics;
       _class.update = update;
+      // getters
       _class.getSprite = getSprite;
 
 
