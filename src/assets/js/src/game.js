@@ -3,7 +3,8 @@ var TILE_SIZE = 16,
     NUM_COLUMNS = 15,
     NUM_ROWS = 10,
     GAME_WIDTH = NUM_COLUMNS * TILE_SIZE, // 240
-    GAME_HEIGHT = NUM_ROWS * TILE_SIZE; // 160
+    GAME_HEIGHT = NUM_ROWS * TILE_SIZE, // 160
+    DEBUG = true;
 
 // vars
 var _game = null,
@@ -31,7 +32,8 @@ function init() {
     {
       preload: preload,
       create: create,
-      update: update
+      update: update,
+      render: render
     }
   );
 
@@ -80,4 +82,10 @@ function update() {
     _keyboardInput.isDown(Phaser.Keyboard.DOWN),
     _keyboardInput.isDown(Phaser.Keyboard.LEFT)
   );
+}
+
+function render() {
+  if(DEBUG) {
+    _map.drawSurroundingCollisions();
+  }
 }

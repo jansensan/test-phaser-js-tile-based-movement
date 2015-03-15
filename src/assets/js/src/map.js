@@ -13,26 +13,45 @@ function Map(game) {
         TILES: 'assets/images/tilesets/tileset.png',
         COLLISION: 'assets/images/tilesets/collision.png'
       };
+      Colors = {
+        RED: 'rgba(240, 0, 0, 0.333)',
+        GREEN: 'rgba(0, 240, 0, 0.333)',
+        BLUE: 'rgba(0, 0, 240, 0.333)'
+      };
 
 
   // vars
   var _game = game, // game reference
+      _map = null, // map object
 
-      // map objects
-      _map = null,
+      // tilesets
       _mainTileset = null,
       _collisionTileset = null,
+
+      // layers
       _tilesLayer = null,
-      _collisionLayer = null;
+      _collisionLayer = null,
+
+      // 
+      _surroundingsToDraw = [];
 
 
   // public api
   var _class = {};
-  _class.preload = preload;
-  _class.init = init;
-  _class.getTilesLayer = getTilesLayer;
-  _class.getCollisionAt = getCollisionAt;
-  _class.getSurroundingCollisionsAt = getSurroundingCollisionsAt;
+      // methods
+      _class.preload = preload;
+      _class.init = init;
+      _class.drawRectAt = drawRectAt;
+      _class.drawRedRectAt = drawRedRectAt;
+      _class.drawGreenRectAt = drawGreenRectAt;
+      _class.drawBlueRectAt = drawBlueRectAt;
+      _class.drawSurroundingCollisions = drawSurroundingCollisions;
+      // getters
+      _class.getTilesLayer = getTilesLayer;
+      _class.getCollisionAt = getCollisionAt;
+      _class.getSurroundingCollisionsAt = getSurroundingCollisionsAt;
+      // properties
+      _class.collisionTiles = [];
 
 
   // private methods
@@ -100,7 +119,13 @@ function Map(game) {
     return hasCollision;
   }
 
+  function resetSurroundingsToDraw() {
+    _surroundingsToDraw.length = 0;
+    _surroundingsToDraw = [];
+  }
+
   function getSurroundingCollisionsAt(tile) {
+    resetSurroundingsToDraw();
     var surroundings = {
       up: false,
       right: false,
@@ -117,6 +142,7 @@ function Map(game) {
       surroundings.up = true;
     } else {
       surroundings.up = getCollisionAt(tileUp);
+      _surroundingsToDraw.push({tile: tileUp, collision: surroundings.up});
     }
 
     // check tile right
@@ -128,6 +154,7 @@ function Map(game) {
       surroundings.right = true;
     } else {
       surroundings.right = getCollisionAt(tileRight);
+      _surroundingsToDraw.push({tile: tileRight, collision: surroundings.right});
     }
 
     // check tile down
@@ -139,6 +166,7 @@ function Map(game) {
       surroundings.down = true;
     } else {
       surroundings.down = getCollisionAt(tileDown);
+      _surroundingsToDraw.push({tile: tileDown, collision: surroundings.down});
     }
 
     // check tile left
@@ -150,12 +178,50 @@ function Map(game) {
       surroundings.left = true;
     } else {
       surroundings.left = getCollisionAt(tileLeft);
+      _surroundingsToDraw.push({tile: tileLeft, collision: surroundings.left});
     }
 
     return surroundings;
   }
 
+  function drawRectAt(tile, color) {
+    if(!tile) {
+      tile = {x: 0, y: 0};
+    }
+    var rect = new Phaser.Rectangle(
+      tile.x * TILE_SIZE,
+      tile.y * TILE_SIZE,
+      TILE_SIZE, TILE_SIZE
+    );
+    _game.debug.geom(rect, color, true);
+  }
 
+  function drawRedRectAt(tile) {
+    drawRectAt(tile, Colors.RED);
+  }
+
+  function drawGreenRectAt(tile) {
+    drawRectAt(tile, Colors.GREEN);
+  }
+
+  function drawBlueRectAt(tile) {
+    drawRectAt(tile, Colors.BLUE);
+  }
+
+  function drawSurroundingCollisions() {
+    var i = 0,
+        numLoops = _surroundingsToDraw.length,
+        tile, collision;
+    for(i; i < numLoops; i++) {
+      tile = _surroundingsToDraw[i].tile;
+      collision = _surroundingsToDraw[i].collision;
+      if(collision) {
+        drawRedRectAt(tile);
+      } else {
+        drawGreenRectAt(tile);
+      }
+    }
+  }
 
 
   return _class;
