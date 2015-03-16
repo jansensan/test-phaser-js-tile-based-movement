@@ -8,18 +8,15 @@ Implementing a tile based movement game prototype. Based on [PhaserJS's Coding T
 
 ## Known Issues
 
-### Phaser's Arcade Physics vs. collision detection
+### NPC collision detection
 
 For some reason, Phaser's Arcade Physics engine didn't handle collision detection. In its stead, I implemented my own tile-based collision system and movement.
 
-### NPC collision detection
-
 The player and NPCs set collisions on the tile they occupy. They also clear the collision on the tile they left.
 
-In the case where an NPC moves in a corridor (one tile width only), and where the player tries to corner the moving NPC, there may be a moment where the collision fails and the NPC walks over the player as if there was no collision there. Maybe adding a small timer for the NPC to choose in which direction to go would cover this possible race condition.
+- [Issue with collision detection](https://github.com/jansensan/test-phaser-js-tile-based-movement/issues/2)
 
 ## TODOs
 
-- NPCs and player
-  - See if possible to create a super class that encompasses common behavior. ES6 or LoDash?
-- Test A* algorithm on clicking a valid tile
+- [Create common "super class" for player and NPC](https://github.com/jansensan/test-phaser-js-tile-based-movement/issues/3)
+- [Test A* algorithm on clicking a valid tile](https://github.com/jansensan/test-phaser-js-tile-based-movement/issues/4)
