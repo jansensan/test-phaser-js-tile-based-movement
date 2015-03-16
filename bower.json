@@ -2,6 +2,7 @@
   "name": "test-phaser-js-grid-movement",
   "version": "0.0.1",
   "dependencies": {
+    "lodash": "^3.5.0",
     "phaser": "2.2.2"
   },
   "devDependencies": {}
