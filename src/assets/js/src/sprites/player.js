@@ -2,27 +2,8 @@ function Player(game, map) {
   // constants
   var SPRITE_NAME = 'player',
       SPRITESHEET_PATH = 'assets/images/sprites/ff4-remake-chocobo.png',
-      TILE_SIZE = 16,
-      ANIM_FPS = 6,
-      WALKING_SPEED = 1;
-  var Animation = {
-    STILL_UP: 'still-up',
-    STILL_DOWN: 'still-down',
-    STILL_SIDE: 'still-side',
-    WALKING_UP: 'walking-up',
-    WALKING_DOWN: 'walking-down',
-    WALKING_SIDE: 'walking-side'
-  };
-  var Anchor = {
-    X: 0.5,
-    Y: 1
-  };
-  var Direction = {
-    UP: 'up',
-    RIGHT: 'right',
-    DOWN: 'down',
-    LEFT: 'left'
-  };
+      ANIM_FPS = SpriteConstants.AnimFPS.NORMAL,
+      WALKING_SPEED = SpriteConstants.WalkingSpeed.NORMAL;
 
 
   // vars
@@ -60,14 +41,14 @@ function Player(game, map) {
     _game.load.spritesheet(
       SPRITE_NAME,
       SPRITESHEET_PATH,
-      TILE_SIZE,
-      TILE_SIZE
+      SpriteConstants.SIZE,
+      SpriteConstants.SIZE
     );
   }
 
   function init(tile) {
     _initialTile = tile;
-    _walkingDirection = Direction.DOWN;
+    _walkingDirection = SpriteConstants.Direction.DOWN;
 
     _sprite = _game.add.sprite(
       getTileX(_initialTile.x),
@@ -76,15 +57,15 @@ function Player(game, map) {
     );
 
     // add anims
-    _sprite.animations.add(Animation.STILL_DOWN, [0]);
-    _sprite.animations.add(Animation.STILL_UP, [2]);
-    _sprite.animations.add(Animation.STILL_SIDE, [4]);
-    _sprite.animations.add(Animation.WALKING_DOWN, [0, 1], ANIM_FPS, true);
-    _sprite.animations.add(Animation.WALKING_UP, [2, 3], ANIM_FPS, true);
-    _sprite.animations.add(Animation.WALKING_SIDE, [4, 5], ANIM_FPS, true);
+    _sprite.animations.add(SpriteConstants.Animation.STILL_DOWN, [0]);
+    _sprite.animations.add(SpriteConstants.Animation.STILL_UP, [2]);
+    _sprite.animations.add(SpriteConstants.Animation.STILL_SIDE, [4]);
+    _sprite.animations.add(SpriteConstants.Animation.WALKING_DOWN, [0, 1], ANIM_FPS, true);
+    _sprite.animations.add(SpriteConstants.Animation.WALKING_UP, [2, 3], ANIM_FPS, true);
+    _sprite.animations.add(SpriteConstants.Animation.WALKING_SIDE, [4, 5], ANIM_FPS, true);
 
     // set anchor
-    _sprite.anchor.setTo(Anchor.X, Anchor.Y);
+    _sprite.anchor.setTo(SpriteConstants.Anchor.X, SpriteConstants.Anchor.Y);
   }
 
   function update(isUpPressed, isRightPressed, isDownPressed, isLeftPressed) {
@@ -102,7 +83,7 @@ function Player(game, map) {
       _surroundingCollisions = _map.getSurroundingCollisionsAt(_currentTile, true);
 
       if(isUpPressed) {
-        _walkingDirection = Direction.UP;
+        _walkingDirection = SpriteConstants.Direction.UP;
         if(!_surroundingCollisions.up) {
           _isWalking = true;
           _isSpriteMoving = true;
@@ -112,7 +93,7 @@ function Player(game, map) {
         }
 
       } else if(isRightPressed) {
-        _walkingDirection = Direction.RIGHT;
+        _walkingDirection = SpriteConstants.Direction.RIGHT;
         if(!_surroundingCollisions.right) {
           _isWalking = true;
           _isSpriteMoving = true;
@@ -122,7 +103,7 @@ function Player(game, map) {
         }
 
       } else if(isDownPressed) {
-        _walkingDirection = Direction.DOWN;
+        _walkingDirection = SpriteConstants.Direction.DOWN;
         if(!_surroundingCollisions.down) {
           _isWalking = true;
           _isSpriteMoving = true;
@@ -132,7 +113,7 @@ function Player(game, map) {
         }
 
       } else if(isLeftPressed) {
-        _walkingDirection = Direction.LEFT;
+        _walkingDirection = SpriteConstants.Direction.LEFT;
         if(!_surroundingCollisions.left) {
           _isWalking = true;
           _isSpriteMoving = true;
@@ -163,44 +144,44 @@ function Player(game, map) {
     // walking animations
     if(_isWalking) {
       switch(_walkingDirection) {
-        case Direction.UP:
-          _sprite.animations.play(Animation.WALKING_UP);
+        case SpriteConstants.Direction.UP:
+          _sprite.animations.play(SpriteConstants.Animation.WALKING_UP);
           break;
 
-        case Direction.RIGHT:
+        case SpriteConstants.Direction.RIGHT:
           _sprite.scale.x = -1;
-          _sprite.animations.play(Animation.WALKING_SIDE);
+          _sprite.animations.play(SpriteConstants.Animation.WALKING_SIDE);
           break;
 
-        case Direction.DOWN:
-          _sprite.animations.play(Animation.WALKING_DOWN);
+        case SpriteConstants.Direction.DOWN:
+          _sprite.animations.play(SpriteConstants.Animation.WALKING_DOWN);
           break;
 
-        case Direction.LEFT:
+        case SpriteConstants.Direction.LEFT:
           _sprite.scale.x = 1;
-          _sprite.animations.play(Animation.WALKING_SIDE);
+          _sprite.animations.play(SpriteConstants.Animation.WALKING_SIDE);
           break;
       }
 
     // still/idle animations
     } else {
       switch(_walkingDirection) {
-        case Direction.UP:
-          _sprite.animations.play(Animation.STILL_UP);
+        case SpriteConstants.Direction.UP:
+          _sprite.animations.play(SpriteConstants.Animation.STILL_UP);
           break;
 
-        case Direction.RIGHT:
+        case SpriteConstants.Direction.RIGHT:
           _sprite.scale.x = -1;
-          _sprite.animations.play(Animation.STILL_SIDE);
+          _sprite.animations.play(SpriteConstants.Animation.STILL_SIDE);
           break;
 
-        case Direction.DOWN:
-          _sprite.animations.play(Animation.STILL_DOWN);
+        case SpriteConstants.Direction.DOWN:
+          _sprite.animations.play(SpriteConstants.Animation.STILL_DOWN);
           break;
 
-        case Direction.LEFT:
+        case SpriteConstants.Direction.LEFT:
           _sprite.scale.x = 1;
-          _sprite.animations.play(Animation.STILL_SIDE);
+          _sprite.animations.play(SpriteConstants.Animation.STILL_SIDE);
           break;
       }
       _sprite.animations.stop();
@@ -210,19 +191,19 @@ function Player(game, map) {
   function move() {
     if(_isSpriteMoving) {
       switch(_walkingDirection) {
-        case Direction.UP:
+        case SpriteConstants.Direction.UP:
           _sprite.y -= WALKING_SPEED;
           break;
 
-        case Direction.RIGHT:
+        case SpriteConstants.Direction.RIGHT:
           _sprite.x += WALKING_SPEED;
           break;
 
-        case Direction.DOWN:
+        case SpriteConstants.Direction.DOWN:
           _sprite.y += WALKING_SPEED;
           break;
 
-        case Direction.LEFT:
+        case SpriteConstants.Direction.LEFT:
           _sprite.x -= WALKING_SPEED;
           break;
       }
@@ -230,45 +211,45 @@ function Player(game, map) {
   }
 
   function isOnTile() {
-    var spriteX = _sprite.x + (Anchor.X * TILE_SIZE),
+    var spriteX = _sprite.x + (SpriteConstants.Anchor.X * SpriteConstants.SIZE),
         spriteY = _sprite.y,
-        isOn = (spriteX % TILE_SIZE === 0) && (spriteY % TILE_SIZE === 0);
+        isOn = (spriteX % SpriteConstants.SIZE === 0) && (spriteY % SpriteConstants.SIZE === 0);
     return isOn;
   }
 
   function getTileFromCurrentPosition() {
-    var spriteX = _sprite.x - (Anchor.X * TILE_SIZE),
-        spriteY = _sprite.y - TILE_SIZE;
-        tile = {x: spriteX / TILE_SIZE, y: spriteY / TILE_SIZE};
+    var spriteX = _sprite.x - (SpriteConstants.Anchor.X * SpriteConstants.SIZE),
+        spriteY = _sprite.y - SpriteConstants.SIZE;
+        tile = {x: spriteX / SpriteConstants.SIZE, y: spriteY / SpriteConstants.SIZE};
     return tile;
   }
 
   function setNextTileFromCurrentDirection() {
     switch(_walkingDirection) {
-      case Direction.UP:
+      case SpriteConstants.Direction.UP:
         _nextTile = {x: _currentTile.x, y: _currentTile.y - 1};
         break;
 
-      case Direction.RIGHT:
+      case SpriteConstants.Direction.RIGHT:
         _nextTile = {x: _currentTile.x + 1, y: _currentTile.y};
         break;
 
-      case Direction.DOWN:
+      case SpriteConstants.Direction.DOWN:
         _nextTile = {x: _currentTile.x, y: _currentTile.y + 1};
         break;
 
-      case Direction.LEFT:
+      case SpriteConstants.Direction.LEFT:
         _nextTile = {x: _currentTile.x - 1, y: _currentTile.y};
         break;
     }
   }
 
   function getTileX(tileXId) {
-    return (Anchor.X * TILE_SIZE) + (tileXId * TILE_SIZE);
+    return (SpriteConstants.Anchor.X * SpriteConstants.SIZE) + (tileXId * SpriteConstants.SIZE);
   }
 
   function getTileY(tileYId) {
-    return (Anchor.Y * TILE_SIZE) + (tileYId * TILE_SIZE);
+    return (SpriteConstants.Anchor.Y * SpriteConstants.SIZE) + (tileYId * SpriteConstants.SIZE);
   }
 
 

@@ -4,11 +4,8 @@
   
   
   // constants
-  var TILE_SIZE = 16,
-      NUM_COLUMNS = 15,
-      NUM_ROWS = 10,
-      GAME_WIDTH = NUM_COLUMNS * TILE_SIZE, // 240
-      GAME_HEIGHT = NUM_ROWS * TILE_SIZE, // 160
+  var GAME_WIDTH = MapConstants.NUM_COLUMNS * MapConstants.TILE_SIZE, // 240
+      GAME_HEIGHT = MapConstants.NUM_ROWS * MapConstants.TILE_SIZE, // 160
       DEBUG = true;
 
   // vars
