@@ -1,10 +1,10 @@
-# PhaserJS Grid Movement
+# PhaserJS - Tile-Based Movement Prototype
 
 ## About
 
-An attempt at implementing [PhaserJS's Coding Tip #5](http://www.photonstorm.com/phaser/phaser-coding-tips-5).
+Implementing a tile based movement game prototype. Based on [PhaserJS's Coding Tip #5](http://www.photonstorm.com/phaser/phaser-coding-tips-5).
 
-[See the demo](https://rawgit.com/jansensan/test-phaser-js-grid-movement/master/src/index.html).
+[See the demo](https://rawgit.com/jansensan/test-phaser-js-tile-based-movement/master/src/index.html).
 
 ## Known Issues
 
