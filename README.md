@@ -18,5 +18,4 @@ The player and NPCs set collisions on the tile they occupy. They also clear the 
 
 ## TODOs
 
-- [Create common "super class" for player and NPC](https://github.com/jansensan/test-phaser-js-tile-based-movement/issues/3)
 - [Test A* algorithm on clicking a valid tile](https://github.com/jansensan/test-phaser-js-tile-based-movement/issues/4)
