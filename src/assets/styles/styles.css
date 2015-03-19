@@ -1,0 +1,55 @@
+body {
+  background-color: #111;
+  overflow: hidden;
+}
+
+.game-device {
+  position: relative;
+}
+
+.device-layout {
+  position: relative;
+  z-index: 2;
+  width: 512px;
+  height: 240px;
+  background-image: url('/assets/images/device.png');
+}
+
+.device-screen {
+  position: absolute;
+  z-index: 1;
+  left: 141px;
+  top: 39px;
+  width: 240px;
+  height: 160px;
+}
+
+.device-button {
+  position: absolute;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+#dpad-up {
+  top: 71px;
+  left: 57px;
+}
+
+#dpad-right {
+  top: 103px;
+  left: 89px;
+}
+
+#dpad-down {
+  top: 135px;
+  left: 57px;
+}
+
+#dpad-left {
+  top: 103px;
+  left: 25px;
+}
