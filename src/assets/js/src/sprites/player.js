@@ -48,7 +48,10 @@ var Player = (function () {
     );
 
     // set anchor
-    this.sprite.anchor.setTo(SpriteConstants.Anchor.X, SpriteConstants.Anchor.Y);
+    this.sprite.anchor.setTo(
+      SpriteConstants.Anchor.X,
+      SpriteConstants.Anchor.Y
+    );
 
     // set movement vars
     this.walkingSpeed = SpriteConstants.WalkingSpeed.NORMAL;

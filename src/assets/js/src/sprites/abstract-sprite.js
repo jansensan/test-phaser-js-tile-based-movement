@@ -22,7 +22,7 @@ var AbstractSprite = (function () {
 
     // animation vars
     this.animSpeed = 0;
-    this.isAnimWalking = false;
+    this.isWalkingAnim = false;
 
     // movement vars
     this.surroundingCollisions = null;
@@ -62,7 +62,7 @@ var AbstractSprite = (function () {
 
   function setAnim() {
     // walking animations
-    if(this.isAnimWalking) {
+    if(this.isWalkingAnim) {
       switch(this.walkingDirection) {
         case SpriteConstants.Direction.UP:
           this.sprite.animations.play(SpriteConstants.Animation.WALKING_UP);

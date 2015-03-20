@@ -57,7 +57,7 @@ var NPC = (function () {
 
     // set anim vars
     this.animSpeed = SpriteConstants.AnimFPS.SLOWEST;
-    this.isAnimWalking = true;
+    this.isWalkingAnim = true;
 
     // add anims
     this.addBasicAnimation();
