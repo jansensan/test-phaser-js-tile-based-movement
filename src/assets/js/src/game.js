@@ -21,6 +21,10 @@
         down: null,
         left: null
       },
+      _isUpPressed = false,
+      _isRightPressed = false,
+      _isDownPressed = false,
+      _isLeftPressed = false,
       _keyboardInput = null;
 
 
@@ -28,8 +32,16 @@
   init();
 
 
-  // methods
+  // init
   function init() {
+    initPhaser();
+
+    getDOMButtons();
+    addDOMListeners();
+  }
+
+  // phaser methods
+  function initPhaser() {
     // add game
     _game = new Phaser.Game(
       GAME_WIDTH, GAME_HEIGHT,
@@ -50,13 +62,6 @@
     _tonberry = new NPC(_game, _map);
   }
 
-  function getDOMButtons() {
-    _dpad.up = document.getElementById('dpad-up');
-    _dpad.right = document.getElementById('dpad-right');
-    _dpad.down = document.getElementById('dpad-down');
-    _dpad.left = document.getElementById('dpad-left');
-  }
-
   function preload() {
     _map.preload();
     _player.preload();
@@ -75,10 +80,10 @@
 
   function update() {
     _player.update(
-      _keyboardInput.isDown(Phaser.Keyboard.UP),
-      _keyboardInput.isDown(Phaser.Keyboard.RIGHT),
-      _keyboardInput.isDown(Phaser.Keyboard.DOWN),
-      _keyboardInput.isDown(Phaser.Keyboard.LEFT)
+      _keyboardInput.isDown(Phaser.Keyboard.UP) || _isUpPressed,
+      _keyboardInput.isDown(Phaser.Keyboard.RIGHT) || _isRightPressed,
+      _keyboardInput.isDown(Phaser.Keyboard.DOWN) || _isDownPressed,
+      _keyboardInput.isDown(Phaser.Keyboard.LEFT) || _isLeftPressed
     );
     _tonberry.update();
   }
@@ -87,6 +92,58 @@
     if(DEBUG) {
       _map.drawSurroundingCollisions();
     }
+  }
+
+  // dom methods
+  function getDOMButtons() {
+    _dpad.up = document.getElementById('dpad-up');
+    _dpad.right = document.getElementById('dpad-right');
+    _dpad.down = document.getElementById('dpad-down');
+    _dpad.left = document.getElementById('dpad-left');
+  }
+
+  function addDOMListeners() {
+    _dpad.up.addEventListener('mousedown', onUpPressed);
+    _dpad.right.addEventListener('mousedown', onRightPressed);
+    _dpad.down.addEventListener('mousedown', onDownPressed);
+    _dpad.left.addEventListener('mousedown', onLeftPressed);
+
+    _dpad.up.addEventListener('mouseup', onUpReleased);
+    _dpad.right.addEventListener('mouseup', onRightReleased);
+    _dpad.down.addEventListener('mouseup', onDownReleased);
+    _dpad.left.addEventListener('mouseup', onLeftReleased);
+  }
+
+  function onUpPressed() {
+    _isUpPressed = true;
+  }
+
+  function onRightPressed() {
+    _isRightPressed = true;
+  }
+
+  function onDownPressed() {
+    _isDownPressed = true;
+  }
+
+  function onLeftPressed() {
+    _isLeftPressed = true;
+  }
+
+  function onUpReleased() {
+    _isUpPressed = false;
+  }
+
+  function onRightReleased() {
+    _isRightPressed = false;
+  }
+
+  function onDownReleased() {
+    _isDownPressed = false;
+  }
+
+  function onLeftReleased() {
+    _isLeftPressed = false;
   }
   
 })();
