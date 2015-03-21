@@ -36,8 +36,10 @@
   function init() {
     initPhaser();
 
-    getDOMButtons();
-    addDOMListeners();
+    // uncomment the following lines
+    // to use the HTML buttons
+    // getDOMButtons();
+    // addDOMListeners();
   }
 
   // phaser methods
@@ -103,15 +105,29 @@
   }
 
   function addDOMListeners() {
+    // pressed (mouse events)
     _dpad.up.addEventListener('mousedown', onUpPressed);
     _dpad.right.addEventListener('mousedown', onRightPressed);
     _dpad.down.addEventListener('mousedown', onDownPressed);
     _dpad.left.addEventListener('mousedown', onLeftPressed);
 
+    // pressed (touch events)
+    _dpad.up.addEventListener('touchstart', onUpPressed);
+    _dpad.right.addEventListener('touchstart', onRightPressed);
+    _dpad.down.addEventListener('touchstart', onDownPressed);
+    _dpad.left.addEventListener('touchstart', onLeftPressed);
+
+    // released (mouse events)
     _dpad.up.addEventListener('mouseup', onUpReleased);
     _dpad.right.addEventListener('mouseup', onRightReleased);
     _dpad.down.addEventListener('mouseup', onDownReleased);
     _dpad.left.addEventListener('mouseup', onLeftReleased);
+
+    // released (mouse events)
+    _dpad.up.addEventListener('touchend', onUpReleased);
+    _dpad.right.addEventListener('touchend', onRightReleased);
+    _dpad.down.addEventListener('touchend', onDownReleased);
+    _dpad.left.addEventListener('touchend', onLeftReleased);
   }
 
   function onUpPressed() {
